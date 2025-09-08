@@ -50,6 +50,18 @@ public class Tool {
     }
     private void setAvailable(boolean available) { this.available = available; }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Tool tool = (Tool) obj;
+        return inventoryId == tool.inventoryId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(inventoryId);
+    }
 
     @Override
     public String toString() {

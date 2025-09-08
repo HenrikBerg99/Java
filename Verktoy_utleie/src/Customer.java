@@ -28,6 +28,20 @@ public class Customer {
         this.email = email;
     }
 
+    // Override equals for å sammenligne kunder basert på customerId. 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Customer customer = (Customer) obj;
+        return customerId == customer.customerId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(customerId);
+    }
+
     @Override
     public String toString() {
         return "ID: " + customerId + "\n" +
