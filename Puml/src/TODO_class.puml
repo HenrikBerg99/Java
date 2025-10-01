@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Task {
+    - dueDate : Localdate
+    - description : String
+    - person : Person
+}
+
+Task -- Person
+        
+class Person {
+    - name : String
+}
+
+@enduml

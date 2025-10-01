@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+Frontend -> RESTAPI : POST /api
+RESTAPI -> TODO_serivice : CcreateTask
+
+database NoSQLDatanbase
+
+TODO_serivice -> NoSQLDatanbase : SQL insert task
+
+
+
+@enduml
