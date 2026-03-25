@@ -13,7 +13,7 @@ public class Main {
         System.out.println();
         
         Player player = new Player(name, 200, 200, 40, 20, 1, 0);
-        Monster monster = new Monster("Goblin", 50, 20, 10, 1);
+        Monster monster = new Monster("Goblin", 50, 50, 20, 10, 1);
 
         System.out.println("================== Ny Helt Opprettet ==================");
         playerStats(player);
@@ -83,13 +83,40 @@ public class Main {
 
         System.out.println("================== Dungeon ==================");
         System.out.println("Du gikk inn i en dungeon, der møtte du på en " + monster.getName());
+        System.out.println();
 
         if(player.getHealth() > 0) {
             while(player.getHealth() > 0 && monster.getHealth() > 0) {
-                System.out.print("Går i kamp!");
+                
+                player.attackMonster(monster);
+                System.out.println("Du slo monstret å gjorde " + player.getDamage() + " damage");
+                System.out.println();
+
+                 if(monster.getHealth() <= 0) {
+                    System.out.println("Du drepte en " + monster.getName() + "!");
+                    System.out.println("Belønning:");
+                    System.out.println("- " + monster.getGoldReward() + " gull");
+                    System.out.println("- " + monster.getXpReward() + " xp");
+
+                    player.addGold(monster.getGoldReward());
+                    player.addXp(monster.getXpReward());
+
+                    break;
+                }
+
+                monster.attackPlayer(player);
+                System.out.println(monster.getName() + "slo deg og gjorde " + monster.getDemage() + " damage på deg.");
+                System.out.println();
+
+                if(player.getHealth() <= 0) {
+                    System.out.println("En " + monster.getName() + " drepte deg, vensligst dra tilbake landsbyen for å hvile.");
+                    break;
+                }
+
             }
+
         } else {
-            System.out.print("Du har ikke noe health ijen, vensligst dra til landsbyen for å hvile.");
+            System.out.print("Du har ikke noe health igjen, vensligst dra til landsbyen for å hvile.");
         }
 
     }
