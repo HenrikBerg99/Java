@@ -12,7 +12,8 @@ public class Main {
         String name = sc.nextLine();
         System.out.println();
         
-        Player player = new Player(name, 200, 200, 20, 1, 0);
+        Player player = new Player(name, 200, 200, 40, 20, 1, 0);
+        Monster monster = new Monster("Goblin", 50, 20, 10, 1);
 
         System.out.println("================== Ny Helt Opprettet ==================");
         playerStats(player);
@@ -26,11 +27,11 @@ public class Main {
 
             switch (choise) {
                 case 1:
-                    enterDungeon(player);
+                    enterDungeon(player, monster);
                     break;
                 case 2:
-                    rest(player);
-                    break;
+                    // rest(player);
+                    // break;
                 case 3:
                     playerStats(player);
                     break;
@@ -78,29 +79,18 @@ public class Main {
         System.out.println();
     }
 
-    public static void enterDungeon(Player player) {
+    public static void enterDungeon(Player player, Monster monster) {
+
         System.out.println("================== Dungeon ==================");
-        System.out.println("Du gikk inn i en dungeon, der møtte du på ett monster og drepte det.");
+        System.out.println("Du gikk inn i en dungeon, der møtte du på en " + monster.getName());
 
-        player.takeDemage(40);
-        player.addGold(10);
-        player.addXp(50);
-        
-        System.out.println("Liv: -40");
-        System.out.println("Gold: +10");
-        System.out.println("Xp: +50");
-
-    }
-
-    public static void rest(Player player) {
-
-        System.out.println("================== Hviler ==================");
-        System.out.println(player.getPlayerName() + " valgte å hvile i landsbyen.");
-        System.out.println(player.getPlayerName() + " Du får tilbake 50 health.");
-
-        player.healPlayer(50);
-
-        System.out.println("Health: " + player.getHealth() + " / " + player.getMaxHealt());
+        if(player.getHealth() > 0) {
+            while(player.getHealth() > 0 && monster.getHealth() > 0) {
+                System.out.print("Går i kamp!");
+            }
+        } else {
+            System.out.print("Du har ikke noe health ijen, vensligst dra til landsbyen for å hvile.");
+        }
 
     }
 

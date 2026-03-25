@@ -2,25 +2,36 @@ public class Monster {
 
     // Instansvaiabler
     private String name;
-    private int helth;
-    private int demage;
+    private int health;
+    private int damage;
     private int xpReward;
     private int goldReward;
     
     // Kontruktør
-    public Monster(String name, int health, int demage, int xpReward, int goldReward) {
+    public Monster(String name, int health, int damage, int xpReward, int goldReward) {
         this.name = name;
-        this.helth = health;
-        this.demage = demage;
+        this.health = health;
+        this.damage = damage;
         this.xpReward = xpReward;
         this.goldReward = goldReward;
     }
 
     public String getName() { return name; }
-    public int getHealth() { return helth; }
-    public int getDemage() { return demage; }
+    public int getHealth() { return health; }
+    public int getDemage() { return damage; }
     public int getXpReward() { return xpReward; }
     public int getGoldReward() { return goldReward; }
 
+    void takeDamage(int amount) {
+        health = health - amount;
+
+        if (health <= 0) {
+            health = 0;
+        }
+    }
+
+    void attackPlayer(Player player) {
+        player.takeDemage(this.damage);
+    }
 
 }
